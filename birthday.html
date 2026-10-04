@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#3b1f4a;
+    --rose:#f4a6b8;
+    --blush:#fde7ec;
+    --lilac:#d9c7f2;
+    --gold:#f2b84b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'DM Sans',sans-serif;
+    color:var(--plum);
+    background:var(--blush);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:2rem 1.25rem;
+    background:
+      radial-gradient(circle at 15% 20%, var(--lilac) 0, transparent 40%),
+      radial-gradient(circle at 85% 80%, var(--rose) 0, transparent 40%),
+      var(--blush);
+    position:relative;
+  }
+  .hero h1{
+    font-family:'Caveat',cursive;
+    font-weight:700;
+    font-size:clamp(3rem,10vw,6.5rem);
+    line-height:1;
+  }
+  .name{
+    font-family:'Caveat',cursive;
+    font-size:clamp(2.2rem,7vw,4.5rem);
+    margin-top:.6rem;
+    color:#b0355a;
+  }
+  .name .dots span{animation:blink 1.4s infinite both}
+  .name .dots span:nth-child(2){animation-delay:.2s}
+  .name .dots span:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,80%,100%{opacity:.15}40%{opacity:1}}
+
+  .sub{margin-top:1rem;max-width:32ch;font-size:1.05rem}
+  .btn{
+    margin-top:2rem;border:0;cursor:pointer;
+    background:var(--plum);color:#fff;
+    font:500 1rem 'DM Sans',sans-serif;
+    padding:.9rem 1.8rem;border-radius:999px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn:hover{transform:scale(1.05);background:#52306a}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:5rem 1.25rem;max-width:1000px;margin:0 auto}
+  h2{
+    font-family:'Caveat',cursive;font-size:clamp(2rem,6vw,3.2rem);
+    text-align:center;margin-bottom:2.5rem;
+  }
+
+  /* ---------- PHOTO GALLERY (blank frames) ---------- */
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:2rem;
+  }
+  .frame{
+    background:#fff;
+    padding:.8rem .8rem 2.8rem;
+    border-radius:4px;
+    box-shadow:0 10px 25px rgba(59,31,74,.15);
+    transform:rotate(var(--tilt,0deg));
+    transition:transform .25s ease;
+  }
+  .frame:nth-child(odd){--tilt:-2.5deg}
+  .frame:nth-child(even){--tilt:2deg}
+  .frame:hover{transform:rotate(0) scale(1.04)}
+  .slot{
+    aspect-ratio:1/1;
+    background:#efe9f5;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    color:#a894bd;font-size:.9rem;
+  }
+  .slot img{width:100%;height:100%;object-fit:cover;display:block}
+  .caption{
+    font-family:'Caveat',cursive;font-size:1.4rem;text-align:center;margin-top:.7rem;
+  }
+
+  /* ---------- NOTE ---------- */
+  .note{
+    background:#fff;border-radius:16px;padding:2rem;
+    max-width:640px;margin:0 auto;
+    box-shadow:0 10px 25px rgba(59,31,74,.12);
+  }
+  .note p{margin-bottom:1rem}
+  .note .sign{font-family:'Caveat',cursive;font-size:1.8rem;text-align:right;margin:0}
+
+  footer{text-align:center;padding:3rem 1rem;font-size:.9rem;opacity:.7}
+
+  /* ---------- CONFETTI ---------- */
+  canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+
+  @media (prefers-reduced-motion:reduce){
+    .name .dots span{animation:none;opacity:1}
+    .frame,.btn{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- HERO -->
+<header class="hero">
+  <h1>Happy Birthday</h1>
+  <!-- Change "Still finding" to her name later -->
+  <p class="name"><span id="her-name">Still finding</span><span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+  <p class="sub">Something special is being put together for you.</p>
+  <button class="btn" id="celebrate">Tap to celebrate</button>
+</header>
+
+<!-- GALLERY -->
+<section>
+  <h2>Our moments</h2>
+  <div class="gallery">
+    <!-- To add a photo: replace the "Photo coming soon" text with
+         <img src="your-photo.jpg" alt="Description"> -->
+    <figure class="frame">
+      <div class="slot">Photo coming soon</div>
+      <figcaption class="caption">Still finding…</figcaption>
+    </figure>
+    <figure class="frame">
+      <div class="slot">Photo coming soon</div>
+      <figcaption class="caption">Still finding…</figcaption>
+    </figure>
+    <figure class="frame">
+      <div class="slot">Photo coming soon</div>
+      <figcaption class="caption">Still finding…</figcaption>
+    </figure>
+    <figure class="frame">
+      <div class="slot">Photo coming soon</div>
+      <figcaption class="caption">Still finding…</figcaption>
+    </figure>
+    <figure class="frame">
+      <div class="slot">Photo coming soon</div>
+      <figcaption class="caption">Still finding…</figcaption>
+    </figure>
+    <figure class="frame">
+      <div class="slot">Photo coming soon</div>
+      <figcaption class="caption">Still finding…</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- NOTE -->
+<section>
+  <h2>A little note</h2>
+  <div class="note">
+    <p>Write your message here. Tell her what she means to you, a favourite memory, or a promise for the year ahead.</p>
+    <p>Add as many paragraphs as you like.</p>
+    <p class="sign">Yours, ____</p>
+  </div>
+</section>
+
+<footer>Made with love</footer>
+
+<script>
+  // ---------- Confetti ----------
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  let pieces = [];
+  const colors = ['#f4a6b8','#d9c7f2','#f2b84b','#b0355a','#ffffff'];
+
+  function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+  resize(); addEventListener('resize', resize);
+
+  function burst(){
+    for(let i=0;i<150;i++){
+      pieces.push({
+        x: innerWidth/2, y: innerHeight/2,
+        vx: (Math.random()-.5)*14,
+        vy: Math.random()*-14-2,
+        size: Math.random()*8+4,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        rot: Math.random()*6, vr:(Math.random()-.5)*.3,
+        life: 160
+      });
+    }
+    if(!animating) animate();
+  }
+
+  let animating = false;
+  function animate(){
+    animating = true;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      p.vy += .3; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life--;
+      ctx.save();
+      ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.6);
+      ctx.restore();
+    });
+    pieces = pieces.filter(p=>p.life>0 && p.y<canvas.height+20);
+    if(pieces.length) requestAnimationFrame(animate);
+    else { animating=false; ctx.clearRect(0,0,canvas.width,canvas.height); }
+  }
+
+  document.getElementById('celebrate').addEventListener('click', ()=>{
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches) burst();
+    document.querySelector('section').scrollIntoView({behavior:'smooth'});
+  });
+</script>
+</body>
+</html>
